@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+
+        <!-- UIkit CSS -->
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/css/uikit.min.css" />
+
+        <!--own stylesheet -->
+          <link href="{{asset('css/base.css')}}" rel="stylesheet" type="text/css">
+
+
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+
+    <!-- navbar -->
+      <section class="barnav">
+          <div class="uk-position-relative">
+            <img data-src="img/snelweg.jpg" alt="" width="100%" uk-img>
+            <div class="uk-position-top" uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+                <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar="dropbar: true;">
+                    <div class="uk-navbar-left">
+                        <ul class="uk-navbar-nav">
+                            <li class="uk-active "><a class="uk-text-warning uk-text-bold" href="/">Home</a></li>
+                            <li><a href="/blog/articles">Articles</a></li>
+                            <li>
+                                <a href="#">Parent</a>
+                                <div class="uk-navbar-dropdown">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li class="uk-active"><a href="#">Active</a></li>
+                                        <li><a href="#">Item</a></li>
+                                        <li class="uk-nav-header">Header</li>
+                                        <li><a href="#">Item</a></li>
+                                        <li><a href="#">Item</a></li>
+                                        <li class="uk-nav-divider"></li>
+                                        <li><a href="#">Item</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+          </div>
+        </section>
+
+        <div class="uk-container uk-container-large">
+          {% block body %}{% endblock %}
+        </div>
+
+        {% block javascripts %}{% endblock %}
+        <!-- UIkit JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit-icons.min.js"></script>
+    </body>
+</html>

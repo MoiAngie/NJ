@@ -1,0 +1,28 @@
+html {
+  box-sizing: border-box;
+  margin-top: 0;
+}
+
+/*********navbar**********/
+
+.barnav img {
+  filter: sepia(80%);
+  height: 30em;
+}
+
+.barnav li a {
+  font-size: 1.5em;
+}
+
+
+/**********articles**********/
+
+article .content img {
+  filter: sepia(80%);
+  width: 20em;
+  height: auto;
+}
+
+.article article img {
+  filter: sepia(80%);
+}

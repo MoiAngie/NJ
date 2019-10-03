@@ -1,21 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}NJ | Article{% endblock %}
+{% block title %}NJ | Article {{ article.title }}{% endblock %}
 
 {% block body %}
 
-<section class="article">
+<section class="article uk-margin-bottom">
   <article class="uk-article">
 
-    <h1 class="uk-article-title"><a class="uk-link-reset" href="">Titre de l'article</a></h1>
+    <h1 class="uk-article-title"><a class="uk-link-reset" href="">{{ article.title }}</a></h1>
+      <!-- ici on n'a pas besoin de for car on récupère avec l'id de la fonction show les données de l'article que l'on souhaite afficher -->
 
-    <p class="uk-article-meta">Ecrit par <a href="#">Super User</a>le 02/10/2019. <a href="#">Catégorie</a></p>
+    <p class="uk-article-meta">Ecrit par <a href="#">Super User</a>le {{ article.createdAt | date('d/m/Y') }} <a href="#">Catégorie</a></p>
 
-    <img src="/img/snelweg2.png" alt="">
+    <img src="/{{ article.image }}" alt="">
 
-    <p class="uk-text-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p class="uk-text-lead">{{ article.content | raw }}</p>
 
     <div class="uk-grid-small uk-child-width-auto" uk-grid>
         <div>

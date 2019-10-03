@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NJ |
+  {% if editMode %}
+    Modifier l'article {{ article.title }}
+    {% else %}
+  Créer un article
+  {% endif %}
+{% endblock %}
+
+{% block body %}
+
+  {{ form_start(formArticle) }}
+    <fieldset class="uk-fieldset">
+
+      <legend class="uk-legend">
+        {% if editMode %}
+          Modifier l'article {{ article.title }}
+          {% else %}
+        Créer un article
+        {% endif %}
+      </legend>
+
+      <div class="uk-margin uk-width-1-4">
+        {{ form_row(formArticle.title, {'label': 'Titre', 'attr': {'placeholder' : "Titre de l'article", 'class' : "uk-input"}})}}
+      </div>
+
+      <div class="uk-margin uk-width-1-2">
+        {{ form_row(formArticle.content, {'label': 'Contenu', 'attr': {'placeholder' : "Contenu de l'article", 'class' : "uk-textarea"}})}}
+      </div>
+
+      <div class="uk-margin uk-width-1-4">
+        {{ form_row(formArticle.image, {'label': 'Image', 'attr': {'placeholder' : "Image de l'article", 'class' : "uk-input"}})}}
+      </div>
+
+      <button class="uk-button uk-button-default uk-margin-bottom">
+        {% if editMode %}
+          Enregistrer
+          {% else %}
+          Ajouter
+          {% endif %}
+      </button>
+
+    </fieldset>
+
+  {{ form_end(formArticle) }}
+
+{% endblock %}

@@ -47,3 +47,12 @@ article .content img {
 .selectpicker label {
   display: none;
 }
+
+
+/**********registration*******/
+
+.uk-fieldset ul {
+  list-style: none;
+  color: red;
+  opacity: 0.7;
+}

@@ -32,8 +32,11 @@
                                         <li><a href="{{ path ('create')}}">Gérer un article</a></li>
                                         <li><a href="#">Item</a></li>
                                         <li class="uk-nav-header">Header</li>
-                                        <li><a href="#">Item</a></li>
-                                        <li><a href="#">Item</a></li>
+                                        {%  if not app.user %}
+                                        <li><a href="{{ path('security_login') }}">Connexion</a></li>
+                                        {% else %}
+                                        <li><a href="{{ path('security_logout') }}">Déconnexion</a></li>
+                                        {% endif %}
                                         <li class="uk-nav-divider"></li>
                                         <li><a href="#">Item</a></li>
                                     </ul>

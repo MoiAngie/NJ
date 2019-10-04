@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NJ | Créer un compte{% endblock %}
+
+{% block body %}
+
+{{ form_start(form) }}
+  <fieldset class="uk-fieldset">
+
+    <legend class="uk-legend uk-text-emphasis">
+        Créer votre compte !
+    </legend>
+
+    <div class="uk-margin uk-width-1-4 uk-text-emphasis">
+      {{ form_row(form.username, {'label': 'Identifiant', 'attr': {'placeholder' : "Identifiant", 'class' : "uk-input"}})}}
+    </div>
+
+    <div class="uk-margin uk-width-1-4 uk-text-emphasis">
+      {{ form_row(form.email, {'label': 'Email', 'attr': {'placeholder' : "Adresse mail", 'class' : "uk-textarea"}})}}
+    </div>
+
+    <div class="uk-margin uk-width-1-4 uk-text-emphasis">
+      {{ form_row(form.password, {'label': 'Mot de passe ', 'attr': {'placeholder' : "Mot de passe", 'class' : "uk-input"}})}}
+    </div>
+
+    <div class="uk-margin uk-width-1-4 uk-text-emphasis">
+      {{ form_row(form.confirm_password, {'label': 'Confirmer le mot de passe ', 'attr': {'placeholder' : "Confirmer le mot de passe", 'class' : "uk-input"}})}}
+    </div>
+
+    <button class="uk-button uk-button-default uk-margin-bottom">
+        Enregistrer
+    </button>
+
+  </fieldset>
+
+{{ form_end(form) }}
+
+
+{% endblock %}

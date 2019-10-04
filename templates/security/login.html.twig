@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NJ | Connexion {% endblock %}
+
+{% block body %}
+
+  <form action="{{ path('security_login') }}" method="post">
+    <fieldset class="uk-fieldset">
+
+      <legend class="uk-legend uk-text-emphasis">
+          Connectez-vous !
+      </legend>
+
+      <div class="uk-margin">
+          <input class="uk-input" type="text" placeholder="Adresse email..." required name="_username">
+      </div>
+
+      <div class="uk-margin">
+          <input class="uk-input" type="text" placeholder="Mot de passe..." required name="_password">
+      </div>
+
+      <button class="uk-button uk-button-default uk-margin-bottom">
+          Connexion
+      </button>
+
+    </fieldset>
+  </form>
+{% endblock %}

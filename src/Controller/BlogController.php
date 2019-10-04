@@ -15,7 +15,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Repository\ArticleRepository; // ici on reprend le namespace du repo et son nom
+use App\Repository\CategoryRepository;
 
 use App\Form\ArticleType;
 
@@ -81,9 +83,14 @@ class BlogController extends AbstractController
       $form->handleRequest($request);//on demande de gérer le formulaire en analysant les données remplies dans la requête
 
       if($form->isSubmitted() && $form->isValid()) {
-        if($article->getId()){
-          $article->setCreatedAt(new \DateTime());
-        }
+        $data = $request->request->get('article');
+           foreach($data['category'] as $category_id)
+           {
+               $rep = $this->getDoctrine()->getRepository(Category::class);
+               $category = $rep->find($category_id);
+               $article->addCategory($category);
+           }
+        
 
           $manager->persist($article);
           $manager->flush();
@@ -101,14 +108,17 @@ class BlogController extends AbstractController
     /**
     * @Route("/blog/{id}", name="show") // route paramétrée avec l'id
     */
-    public function show(Article $article)//ArticleRepository $repo, $id: le paramconverter permet de chercher l'article qui correspond à l'id sans avoir à lui définier en + un repo et une id
+    public function show(Article $article, CategoryRepository $repo)//ArticleRepository $repo, $id: le paramconverter permet de chercher l'article qui correspond à l'id sans avoir à lui définier en + un repo et une id
     {
       // $repo = $this->getDoctrine()->getRepository(Article::class);
 
       //$article = $repo->find($id); plus besoin grâce au paramconverter
 
+      $category = $repo->findAll();
+
       return $this->render('blog/show.html.twig', [
-        'article' => $article //on lui passe la variable article pour qu'il aille chercher les données de $article
+        'article'  => $article, //on lui passe la variable article pour qu'il aille chercher les données de $article
+        'category' => $category
       ]);
     }
 

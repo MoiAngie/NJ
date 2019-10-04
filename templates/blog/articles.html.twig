@@ -16,14 +16,16 @@
               <h2 class="uk-comment-title-large uk-margin-remove"><a class="uk-link-reset" href="#">{{ article.title }}</a></h2>
               <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
                   <li><a href="#">Ecrit le {{ article.createdAt | date('d/m/Y') }}</a></li>
-                  <li><a href="#">Incivilités</a></li>
+                  {% for category in article.category %}
+                  <li><a href="#">{{ category.title }}</a></li>
+                  {% endfor %}
               </ul>
           </div>
         </header>
           <div class="content">
             <img src="{{ article.image }}" alt="">
-            <p>{{ article.content | raw }}</p>
-            <a class="uk-button uk-button-default" href="{{ path('show', {'id' : article.id }) }}">Bouton</a>
+            <p>{{ article.content | truncate(200, true) }}</p>
+            <a class="uk-button uk-button-default" href="{{ path('show', {'id' : article.id }) }}">Lire la suite</a>
             <!-- on lui passe ici l'identifiant de l'article dans le 2ème paramètre de la focntion path de twig pour qu'il le récupère dans la route et donc dans la page de cet article -->
             <hr>
       </article>

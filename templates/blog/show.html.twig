@@ -10,7 +10,20 @@
     <h1 class="uk-article-title"><a class="uk-link-reset" href="">{{ article.title }}</a></h1>
       <!-- ici on n'a pas besoin de for car on récupère avec l'id de la fonction show les données de l'article que l'on souhaite afficher -->
 
-    <p class="uk-article-meta">Ecrit par <a href="#">Super User</a>le {{ article.createdAt | date('d/m/Y') }} <a href="#">Catégorie</a></p>
+    <p class="uk-article-meta">Ecrit par <a href="#">Super User</a> le {{ article.createdAt | date('d/m/Y') }} <a href="#"></a></p>
+
+    {% for category in article.category %}
+      <div class="uk-label uk-label-black uk-padding-small uk-margin-bottom">
+        <a class="uk-link-text" href="#"> {{ category.title }} </a>
+      </div>
+    {% endfor %}
+    <br/>
+
+    <div class="uk-label uk-label-warning uk-padding-small uk-margin-bottom">
+      <a class="uk-link-text" href="#comment"> {{ article.comments|length }} commentaire(s)</a>
+    </div>
+
+    <br/>
 
     <img src="/{{ article.image }}" alt="">
 
@@ -20,11 +33,35 @@
         <div>
             <a class="uk-button uk-button-default" href="#">Autre</a>
         </div>
-        <div>
-            <a class="uk-button uk-button-default" href="#">5 Comments</a>
-        </div>
     </div>
 
 </article>
+</section>
+
+<section class="comments" id="comment">
+  <div class="uk-overflow-auto">
+    <table class="uk-table uk-table-responsive uk-table-hover uk-table-justify uk-table-divider">
+        <thead>
+            <tr>
+                <th class="uk-table-shrink"></th>
+                <th class="uk-table-expand">Auteur</th>
+                <th class="uk-width-small">Posté le</th>
+                <th class="uk-table-expand">Commentaire</th>
+            </tr>
+        </thead>
+        {% for comment in article.comments %}
+        <tbody>
+            <tr>
+                <td><input class="uk-checkbox" type="checkbox"></td>
+                <td class="uk-text">{{ comment.author }}</td>
+                <td class="uk-text-truncate">{{ comment.createdAt | date('d/m/Y') }}</td>
+                <td class="uk-table-link">
+                    <a class="uk-link-reset" href="">{{ comment.content | raw }}</a>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+  </div>
 </section>
 {% endblock %}

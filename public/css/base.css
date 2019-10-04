@@ -26,3 +26,24 @@ article .content img {
 .article article img {
   filter: sepia(80%);
 }
+
+
+/*********article*********/
+
+.uk-label {
+  border-radius: 1em;
+}
+
+.uk-label-black {
+  background-color: black;
+}
+
+#comment tr:hover {
+  background-color: warning;
+}
+
+/*********create**********/
+
+.selectpicker label {
+  display: none;
+}

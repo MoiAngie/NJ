@@ -16,10 +16,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Repository\ArticleRepository; // ici on reprend le namespace du repo et son nom
 use App\Repository\CategoryRepository;
 
 use App\Form\ArticleType;
+use App\Form\CommentType;
+
 
 class BlogController extends AbstractController
 {
@@ -90,7 +93,7 @@ class BlogController extends AbstractController
                $category = $rep->find($category_id);
                $article->addCategory($category);
            }
-        
+
 
           $manager->persist($article);
           $manager->flush();
@@ -108,17 +111,34 @@ class BlogController extends AbstractController
     /**
     * @Route("/blog/{id}", name="show") // route paramétrée avec l'id
     */
-    public function show(Article $article, CategoryRepository $repo)//ArticleRepository $repo, $id: le paramconverter permet de chercher l'article qui correspond à l'id sans avoir à lui définier en + un repo et une id
+    public function show(Article $article, CategoryRepository $repo, Request $request, ObjectManager $manager)//ArticleRepository $repo, $id: le paramconverter permet de chercher l'article qui correspond à l'id sans avoir à lui définier en + un repo et une id
     {
       // $repo = $this->getDoctrine()->getRepository(Article::class);
 
       //$article = $repo->find($id); plus besoin grâce au paramconverter
+      $comment = new Comment();
+
+      $form = $this->createForm(CommentType::class, $comment);
+
+      $form->handleRequest($request);
+
+      if($form->isSubmitted() && $form->isValid()) {
+        $comment->setArticle($article);
+
+
+        $manager->persist($comment);
+        $manager->flush();
+
+        return $this->redirectToRoute('show', ['id' => $article->getId()]);
+    }
+
 
       $category = $repo->findAll();
 
       return $this->render('blog/show.html.twig', [
         'article'  => $article, //on lui passe la variable article pour qu'il aille chercher les données de $article
-        'category' => $category
+        'category' => $category,
+        'commentForm' => $form->createView()
       ]);
     }
 

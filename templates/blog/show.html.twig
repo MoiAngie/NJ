@@ -27,7 +27,7 @@
 
     <img src="/{{ article.image }}" alt="">
 
-    <p class="uk-text-lead">{{ article.content | raw }}</p>
+    <p>{{ article.content | raw }}</p>
 
     <div class="uk-grid-small uk-child-width-auto" uk-grid>
         <div>
@@ -37,7 +37,7 @@
 
 </article>
 </section>
-
+  <hr class="uk-divider-icon">
 <section class="comments" id="comment">
   <div class="uk-overflow-auto">
     <table class="uk-table uk-table-responsive uk-table-hover uk-table-justify uk-table-divider">
@@ -63,5 +63,26 @@
         {% endfor %}
     </table>
   </div>
+  </section>
+    <hr class="uk-divider-icon">
+  <section class="comment uk-margin">
+
+  {{ form_start(commentForm) }}
+    <fieldset class="uk-fieldset">
+
+      <legend class="uk-legend"> Ajoutez votre commentaire </legend>
+
+      <div class="uk-margin uk-width-1-4">
+        {{ form_row(commentForm.author,  {'label': 'Auteur', 'attr': {'placeholder': "Votre nom", 'class' : "uk-input"}})}}
+      </div>
+      <div class="uk-margin uk-width-1-2">
+        {{ form_row(commentForm.content,  {'label': 'Commentaire', 'attr': {'placeholder': "Votre avis", 'class' : "uk-textarea"}})}}
+      </div>
+
+      <button class="uk-button uk-button-default uk-margin-bottom">Envoyer</button>
+
+    </fieldset>
+  {{ form_end(commentForm) }}
+
 </section>
 {% endblock %}

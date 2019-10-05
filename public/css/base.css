@@ -15,6 +15,14 @@ html {
 }
 
 
+/***********totop**********/
+
+polyline {
+  color: red;
+  margin-right: 5em;
+  transform: scale(1.2);
+}
+
 /**********articles**********/
 
 article .content img {
